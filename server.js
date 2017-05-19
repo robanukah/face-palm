@@ -3,11 +3,12 @@ const bodyParser = require('body-parser')
 const MongoClient = require('mongodb').MongoClient
 const app = express()
 
-const MONGODB_URL = 'mongodb://localhost:27017/quotes'
+const MONGODB_URL = process.env.MONGO_URL || 'mongodb://localhost:27017/quotes'
 
 let db
 
 MongoClient.connect(MONGODB_URL, (err, database) => {
+    errToConsole(err)
     db = database
 
     app.listen(3000, () => {
@@ -25,6 +26,7 @@ app.get('/', (req, res) => {
         .collection('quotes')
         .find()
         .toArray((err, result) => {
+            errToConsole(err)
             res.render('index.ejs', {quotes: result})
         })
 })
@@ -33,7 +35,13 @@ app.post('/quotes', (req, res) => {
     db
         .collection('quotes')
         .save(req.body, (err, result) => {
-            console.log(req.body)
+            errToConsole(err)
             res.redirect('/')
         })
 })
+
+const errToConsole = (err) => {
+    if (err) {
+        console.log(err)
+    }
+}
