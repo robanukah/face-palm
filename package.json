@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "node specific blog-app",
   "main": "server.js",
+  "scripts": {
+    "start": "node ./server.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/solairerove/face-palm.git"
@@ -17,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/solairerove/face-palm/issues"
   },
-  "homepage": "https://github.com/solairerove/face-palm#readme"
+  "homepage": "https://github.com/solairerove/face-palm#readme",
+  "dependencies": {
+    "express": "^4.15.3"
+  }
 }
