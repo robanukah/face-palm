@@ -1,0 +1,21 @@
+{
+  "name": "face-palm",
+  "version": "1.0.0",
+  "description": "node specific blog-app",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/solairerove/face-palm.git"
+  },
+  "keywords": [
+    "blog",
+    "node",
+    "express"
+  ],
+  "author": "Nikita Krivitski",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/solairerove/face-palm/issues"
+  },
+  "homepage": "https://github.com/solairerove/face-palm#readme"
+}
