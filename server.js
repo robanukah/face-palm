@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 const MongoClient = require('mongodb').MongoClient
 const app = express()
 
-const MONGODB_URL = process.env.MONGO_URL || 'mongodb://localhost:27017/quotes'
+const MONGODB_URL = process.env.MONGODB_URI || 'mongodb://localhost:27017/quotes'
 
 let db
 
