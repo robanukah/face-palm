@@ -24,7 +24,8 @@
   "homepage": "https://github.com/solairerove/face-palm#readme",
   "dependencies": {
     "body-parser": "^1.17.2",
-    "express": "^4.15.3"
+    "express": "^4.15.3",
+    "mongodb": "^2.2.26"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"

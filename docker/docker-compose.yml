@@ -1,0 +1,9 @@
+version: "3"
+
+services:
+  mongodb:
+    container_name: face-palm-mongo
+    image: mongo:3.4.4
+    restart: unless-stopped
+    ports:
+      - 27017:27017
