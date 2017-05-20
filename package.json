@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon --exec babel-node -- src/server.es6",
     "lint": "eslint src/**",
-    "serve": "babel src -d lib && node lib/server.js"
+    "serve": "./node_modules/.bin/babel src -d lib && node lib/server.js"
   },
   "repository": {
     "type": "git",
