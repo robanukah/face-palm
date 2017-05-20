@@ -9,18 +9,10 @@ const MONGODB_URL = process.env.MONGODB_URI || 'mongodb://localhost:27017/quotes
 
 let db;
 
-// MongoClient.connect(MONGODB_URL, (err, database) => { errToConsole(err); db =
-// database;
-
-app.listen(PORT, () => {
-  console.log('listening on ' + PORT);
-
-  MongoClient.connect(MONGODB_URL, (err, database) => {
-    errToConsole(err);
-    db = database;
-  });
+MongoClient.connect(MONGODB_URL, (err, database) => {
+  errToConsole(err);
+  db = database;
 });
-// });
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
@@ -44,6 +36,10 @@ app.post('/quotes', (req, res) => {
       errToConsole(err);
       res.redirect('/');
     });
+});
+
+app.listen(PORT, () => {
+  console.log('listening on ' + PORT);
 });
 
 const errToConsole = (err) => {
