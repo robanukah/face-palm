@@ -1,0 +1,7 @@
+{
+    "workbench.iconTheme": "vscode-icons",
+    "editor.fontFamily": "Monaco, 'Courier New', monospace",
+    "workbench.colorTheme": "Atom One Dark",
+
+    "eslint.enable": true
+}

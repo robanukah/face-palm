@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon --exec babel-node -- src/server.es6",
+    "lint": "eslint src/**",
     "serve": "babel src -d lib && node lib/server.js"
   },
   "repository": {
@@ -30,7 +31,12 @@
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
+    "babel-eslint": "^7.2.3",
     "babel-preset-env": "^1.4.0",
+    "eslint": "^3.19.0",
+    "eslint-config-google": "^0.7.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-node": "^4.2.2",
     "nodemon": "^1.11.0"
   },
   "engines": {
