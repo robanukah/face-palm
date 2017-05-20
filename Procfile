@@ -1,1 +1,1 @@
-web: $MONGODB_URI node server.js $PORT
+web: npm run serve

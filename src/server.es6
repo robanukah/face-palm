@@ -1,6 +1,7 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const MongoClient = require('mongodb').MongoClient
+import express from 'express'
+import bodyParser from 'body-parser'
+import MongoClient from 'mongodb'
+
 const app = express()
 
 const MONGODB_URL = process.env.MONGODB_URI || 'mongodb://localhost:27017/quotes'
