@@ -4,7 +4,6 @@ import MongoClient from 'mongodb';
 
 const app = express();
 
-const PORT = process.env.PORT || 3000;
 const MONGODB_URL = process.env.MONGODB_URI || 'mongodb://localhost:27017/quotes';
 
 let db;
@@ -12,16 +11,15 @@ let db;
 MongoClient.connect(MONGODB_URL, (err, database) => {
   errToConsole(err);
   db = database;
-
-  app.listen(PORT, () => {
-    console.log('listening on ' + PORT);
-  });
 });
 
+app.set('port', process.env.PORT || 3000);
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(express.static('views'));
 app.set('view engine', 'ejs');
+
+app.listen(app.get('port'));
 
 app.get('/', (req, res) => {
   db
