@@ -4,6 +4,7 @@ import MongoClient from 'mongodb';
 
 const app = express();
 
+const PORT = process.env.PORT || 3000;
 const MONGODB_URL = process.env.MONGODB_URI || 'mongodb://localhost:27017/quotes';
 
 let db;
@@ -12,8 +13,8 @@ MongoClient.connect(MONGODB_URL, (err, database) => {
   errToConsole(err);
   db = database;
 
-  app.listen(3000, () => {
-    console.log('listening on 3000');
+  app.listen(PORT, () => {
+    console.log('listening on ' + PORT);
   });
 });
 
