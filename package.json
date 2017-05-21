@@ -2,9 +2,9 @@
   "name": "face-palm",
   "version": "1.0.0",
   "description": "node specific blog-app",
-  "main": "index.es6",
+  "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node -- src/index.es6",
+    "start": "nodemon --exec babel-node -- src/index.js",
     "lint": "eslint src/**",
     "serve": "./node_modules/.bin/babel src -d lib && node lib/index.js"
   },
