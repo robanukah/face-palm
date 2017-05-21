@@ -1,12 +1,13 @@
 import express from 'express';
-import bodyParser from 'body-parser';
 import MongoClient from 'mongodb';
+
+import {serverConfig} from './config';
+import {mongo, server} from './constants';
 import {router} from './routes';
-import {PORT, MONGODB_URL} from './config';
 
 const app = express();
 
-MongoClient.connect(MONGODB_URL, (err, database) => {
+MongoClient.connect(mongo.MONGODB_URL, (err, database) => {
   if (err) {
     console.log(err);
   }
@@ -14,11 +15,8 @@ MongoClient.connect(MONGODB_URL, (err, database) => {
   router(app, database);
 });
 
-app.set('view engine', 'ejs');
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
-app.use(express.static('views'));
+serverConfig(app);
 
-app.listen(PORT, () => {
-  console.log('listening on ' + PORT);
+app.listen(server.PORT, () => {
+  console.log('listening on ' + server.PORT);
 });

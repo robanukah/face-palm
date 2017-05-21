@@ -1,4 +1,4 @@
-const POSTS_COLLECTION = 'posts';
+import {POSTS_COLLECTION} from '../constants/mongo';
 
 export const getPosts = (app, db) => {
     app.get('/', (req, res) => {
