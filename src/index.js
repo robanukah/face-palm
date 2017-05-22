@@ -1,13 +1,14 @@
 import express from 'express';
 import MongoClient from 'mongodb';
 
-import {serverConfig} from './config';
-import {mongo, server} from './constants';
+import {expressConfig} from './config/server';
+import {MONGODB_URL} from './constants/mongo';
+import {PORT} from './constants/server';
 import {router} from './routes';
 
 const app = express();
 
-MongoClient.connect(mongo.MONGODB_URL, (err, database) => {
+MongoClient.connect(MONGODB_URL, (err, database) => {
   if (err) {
     console.log(err);
   }
@@ -15,8 +16,8 @@ MongoClient.connect(mongo.MONGODB_URL, (err, database) => {
   router(app, database);
 });
 
-serverConfig(app);
+expressConfig(app);
 
-app.listen(server.PORT, () => {
-  console.log('listening on ' + server.PORT);
+app.listen(PORT, () => {
+  console.log('listening on ' + PORT);
 });

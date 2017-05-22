@@ -1,30 +1,15 @@
-import {POSTS_COLLECTION} from '../constants/mongo';
+import {fetchAll, create} from '../db/posts';
 
-export const getPosts = (app, db) => {
+const getPosts = (app, db) => {
     app.get('/', (req, res) => {
-        db
-            .collection(POSTS_COLLECTION)
-            .find()
-            .toArray((err, result) => {
-                errToConsole(err);
-                res.render('index.ejs', {posts: result});
-            });
+        fetchAll(db, res);
     });
 };
 
-export const createPost = (app, db) => {
+const createPost = (app, db) => {
     app.post('/posts', (req, res) => {
-        db
-            .collection(POSTS_COLLECTION)
-            .save(req.body, (err, result) => {
-                errToConsole(err);
-                res.redirect('/');
-            });
+        create(db, req, res);
     });
 };
 
-const errToConsole = (err) => {
-    if (err) {
-        console.log(err);
-    }
-};
+export {getPosts, createPost};

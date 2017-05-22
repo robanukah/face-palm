@@ -1,4 +1,4 @@
-import {getPosts, createPost} from './postRoutes';
+import {getPosts, createPost} from './post-routes';
 
 export const router = (app, db) => {
     getPosts(app, db);
