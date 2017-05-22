@@ -1,23 +1,33 @@
 import express from 'express';
-import MongoClient from 'mongodb';
+import mongoose from 'mongoose';
 
 import {expressConfig} from './config/server';
-import {MONGODB_URL} from './constants/mongo';
+import {mongoLogs} from './config/mongo';
+
+import {postRouter} from './routes/post-router';
+
 import {PORT} from './constants/server';
-import {router} from './routes';
+import {MONGODB_URL} from './constants/mongo';
 
 const app = express();
+const router = new express.Router();
 
-MongoClient.connect(MONGODB_URL, (err, database) => {
-  if (err) {
-    console.log(err);
-  }
+// connect to db
+mongoose.connect(MONGODB_URL);
 
-  router(app, database);
-});
+// mongoose logs
+mongoLogs(mongoose);
 
+// configure app to use bodyParser()
 expressConfig(app);
 
+// post routes
+postRouter(router);
+
+// register all routes
+app.use('/api', router);
+
+// start server
 app.listen(PORT, () => {
   console.log('listening on ' + PORT);
 });

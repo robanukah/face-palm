@@ -1,0 +1,11 @@
+GET http://localhost:3000/api/posts
+
+POST http://localhost:3000/api/posts
+Content-Type: application/json; charset=utf-8
+
+{
+    "title": "title",
+    "content": "content"
+}
+
+GET http://localhost:3000/api/posts/5922f6898f8ebaea6cd54312
