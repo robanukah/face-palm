@@ -1,7 +1,8 @@
 import mongoose from 'mongoose';
 
-export const PostSchema = new mongoose.Schema({
+const PostSchema = new mongoose.Schema({
     title: String,
+    content: String,
 });
 
 export default mongoose.model('Post', PostSchema);
