@@ -1,6 +1,6 @@
 import Post from '../models/post';
 
-export const fetchPosts = (res) => {
+export const fetchPosts = async (res) => {
     Post.find({}, (err, posts) => {
         if (err) {
             res.send(err);
@@ -9,7 +9,7 @@ export const fetchPosts = (res) => {
     });
 };
 
-export const fetchPost = (req, res) => {
+export const fetchPost = async (req, res) => {
     Post.findById(req.params.post_id, (err, post) => {
         if (err) {
             res.send(err);
@@ -18,7 +18,7 @@ export const fetchPost = (req, res) => {
     });
 };
 
-export const createPost = (req, res) => {
+export const createPost = async (req, res) => {
     let post = new Post();
     post.title = req.body.title;
     post.content = req.body.content;
