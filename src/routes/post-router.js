@@ -1,4 +1,9 @@
-import {fetchPosts, fetchPost, createPost} from '../db/post-middleware';
+import {
+    fetchPosts,
+    fetchPost,
+    createPost,
+    updatePost,
+} from '../db/post';
 
 export const postRouter = (router) => {
     router
@@ -8,5 +13,6 @@ export const postRouter = (router) => {
 
     router
         .route('/posts/:post_id')
-        .get((req, res) => fetchPost(req, res));
+        .get((req, res) => fetchPost(req, res))
+        .put((req, res) => updatePost(req, res));
 };
