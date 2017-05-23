@@ -1,9 +1,4 @@
-import {
-    fetchPosts,
-    fetchPost,
-    createPost,
-    updatePost,
-} from '../db/post';
+import {fetchPosts, fetchPost, createPost, updatePost} from '../db/post';
 
 export const postRouter = (router) => {
     router

@@ -38,3 +38,6 @@ jspm_packages
 
 # Babel lib
 lib
+
+.idea
+.iml
