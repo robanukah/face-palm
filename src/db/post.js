@@ -28,6 +28,7 @@ export const updatePost = async (req, res) => {
 const mapDtoToDomain = (post, req) => {
     post.title = req.body.title;
     post.content = req.body.content;
+    post.description = req.body.content;
     post.avatar = req.body.avatar;
     post.date = req.body.date;
     post.author = req.body.author;
