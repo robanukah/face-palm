@@ -1,6 +1,10 @@
-import {fetchPosts, fetchPost, createPost, updatePost} from '../db/post';
+import express from 'express';
 
-export const postRouter = (router) => {
+import {createPost, fetchPost, fetchPosts, updatePost} from '../db/post';
+
+const router = new express.Router();
+
+export const postRouter = () => {
     router
         .route('/posts')
         .get((req, res) => fetchPosts(res))
@@ -10,4 +14,6 @@ export const postRouter = (router) => {
         .route('/posts/:post_id')
         .get((req, res) => fetchPost(req, res))
         .put((req, res) => updatePost(req, res));
+
+    return router;
 };

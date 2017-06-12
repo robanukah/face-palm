@@ -1,7 +1,7 @@
-# face-palm
+# [face-palm](https://face-palm.herokuapp.com)
 Rewrite blog-app 
 
 ### How to start:
 ```bash
-MONGODB_URI=mongodb://localhost:27017/quotes npm run dev
+MONGODB_URI=mongodb://localhost:27017 npm run serve
 ```

@@ -1,33 +1,42 @@
 import express from 'express';
+import bodyParser from 'body-parser';
+import cors from 'cors';
 import mongoose from 'mongoose';
-
-import {expressConfig} from './config/server';
-import {mongoLogs} from './config/mongo';
 
 import {postRouter} from './routes/post-router';
 
-import {PORT} from './constants/server';
-import {MONGODB_URL} from './constants/mongo';
-
 const app = express();
-const router = new express.Router();
+const router = postRouter();
 
-// connect to db
-mongoose.connect(MONGODB_URL);
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017');
 
-// mongoose logs
-mongoLogs(mongoose);
+mongoose
+    .connection
+    .on('open', () => {
+        console.log('Mongoose is connected');
+    });
 
-// configure app to use bodyParser()
-expressConfig(app);
+mongoose
+    .connection
+    .on('connected', () => {
+        console.log('Mongoose default connection opened to ');
+    });
 
-// post routes
-postRouter(router);
+mongoose
+    .connection
+    .on('error', (err) => {
+        console.log('Mongoose default connection error: '.concat(err));
+    });
+
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+app.use(cors());
 
 // register all routes
 app.use('/api', router);
 
 // start server
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log('listening on ' + PORT);
 });
