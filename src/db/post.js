@@ -9,8 +9,7 @@ export const fetchPost = (req, res) => {
 };
 
 export const createPost = (req, res) => {
-    let post = new Post();
-    mapDtoToDomain(post, req);
+    let post = mapDtoToDomain(req);
 
     post.save((err) => send(res, {message: 'Post created!'}, err));
 };
@@ -18,20 +17,27 @@ export const createPost = (req, res) => {
 export const updatePost = (req, res) => {
     Post.findById(req.params.post_id, (err, post) => {
         sendErr(err, res);
-        mapDtoToDomain(post, req);
+        post.title = req.body.title;
+        post.content = req.body.content;
+        post.description = req.body.description;
+        post.avatar = req.body.avatar;
+        post.date = req.body.date;
+        post.author = req.body.author;
 
         post.save((err) => send(res, {message: 'Post updated!'}, err));
     });
 };
 
-// not pure, fuck you
-const mapDtoToDomain = (post, req) => {
+const mapDtoToDomain = (req) => {
+    let post = new Post();
     post.title = req.body.title;
     post.content = req.body.content;
     post.description = req.body.description;
     post.avatar = req.body.avatar;
     post.date = req.body.date;
     post.author = req.body.author;
+
+    return post;
 };
 
 const sendErr = (err, res) => {
