@@ -1,6 +1,6 @@
 import express from 'express';
 
-import {createPost, fetchPost, fetchPosts, updatePost} from '../db/post';
+import {createPost, deletePost, fetchPost, fetchPosts, updatePost} from '../db/post';
 
 const router = new express.Router();
 
@@ -13,7 +13,8 @@ export const postRouter = () => {
     router
         .route('/posts/:post_id')
         .get((req, res) => fetchPost(req, res))
-        .put((req, res) => updatePost(req, res));
+        .put((req, res) => updatePost(req, res))
+        .delete((req, res) => deletePost(req, res));
 
     return router;
 };

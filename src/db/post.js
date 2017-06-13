@@ -1,17 +1,32 @@
 import Post from '../domain/post';
 
 export const fetchPosts = (res) => {
-    Post.find({}, (err, posts) => send(res, posts, err));
+    Post.find({}, (err, posts) => {
+        sendErr(err);
+        res.json(posts);
+    });
 };
 
 export const fetchPost = (req, res) => {
-    Post.findById(req.params.post_id, (err, post) => send(res, post, err));
+    Post.findById(req.params.post_id, (err, post) => {
+        sendErr(err);
+        res.json(post);
+    });
 };
 
 export const createPost = (req, res) => {
-    let post = mapDtoToDomain(req);
+    let post = new Post();
+    post.title = req.body.title;
+    post.content = req.body.content;
+    post.description = req.body.description;
+    post.avatar = req.body.avatar;
+    post.date = req.body.date;
+    post.author = req.body.author;
 
-    post.save((err) => send(res, {message: 'Post created!'}, err));
+    post.save((err) => {
+        sendErr(err);
+        res.json({message: 'Post created', data: post});
+    });
 };
 
 export const updatePost = (req, res) => {
@@ -24,29 +39,22 @@ export const updatePost = (req, res) => {
         post.date = req.body.date;
         post.author = req.body.author;
 
-        post.save((err) => send(res, {message: 'Post updated!'}, err));
+        post.save((err) => {
+            sendErr(err);
+            res.json({message: 'Post updated', data: post});
+        });
     });
 };
 
-const mapDtoToDomain = (req) => {
-    let post = new Post();
-    post.title = req.body.title;
-    post.content = req.body.content;
-    post.description = req.body.description;
-    post.avatar = req.body.avatar;
-    post.date = req.body.date;
-    post.author = req.body.author;
-
-    return post;
+export const deletePost = (req, res) => {
+    Post.findByIdAndRemove(req.params.post_id, (err) => {
+        sendErr(err);
+        res.json({message: 'Post deleted'});
+    });
 };
 
 const sendErr = (err, res) => {
     if (err) {
         res.send(err);
     }
-};
-
-const send = (res, obj, err) => {
-    sendErr(err, res);
-    res.json(obj);
 };
