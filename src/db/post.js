@@ -1,21 +1,21 @@
-import Post from '../models/post';
+import Post from '../domain/post';
 
-export const fetchPosts = async (res) => {
+export const fetchPosts = (res) => {
     Post.find({}, (err, posts) => send(res, posts, err));
 };
 
-export const fetchPost = async (req, res) => {
+export const fetchPost = (req, res) => {
     Post.findById(req.params.post_id, (err, post) => send(res, post, err));
 };
 
-export const createPost = async (req, res) => {
+export const createPost = (req, res) => {
     let post = new Post();
     mapDtoToDomain(post, req);
 
     post.save((err) => send(res, {message: 'Post created!'}, err));
 };
 
-export const updatePost = async (req, res) => {
+export const updatePost = (req, res) => {
     Post.findById(req.params.post_id, (err, post) => {
         sendErr(err, res);
         mapDtoToDomain(post, req);

@@ -3,5 +3,5 @@ Rewrite blog-app
 
 ### How to start:
 ```bash
-MONGODB_URI=mongodb://localhost:27017 npm run serve
+MONGODB_URI=mongodb://localhost:27017 yarn start
 ```
