@@ -15,13 +15,14 @@ export const fetchPost = (req, res) => {
 };
 
 export const createPost = (req, res) => {
-    let post = new Post();
-    post.title = req.body.title;
-    post.content = req.body.content;
-    post.description = req.body.description;
-    post.avatar = req.body.avatar;
-    post.date = req.body.date;
-    post.author = req.body.author;
+    const post = new Post({
+        title: req.body.title,
+        content: req.body.content,
+        description: req.body.description,
+        avatar: req.body.avatar,
+        date: req.body.date,
+        author: req.body.author,
+    });
 
     post.save((err) => {
         sendErr(err);
@@ -30,19 +31,9 @@ export const createPost = (req, res) => {
 };
 
 export const updatePost = (req, res) => {
-    Post.findById(req.params.post_id, (err, post) => {
+    Post.findByIdAndUpdate(req.params.post_id, req.body, (err, post) => {
         sendErr(err, res);
-        post.title = req.body.title;
-        post.content = req.body.content;
-        post.description = req.body.description;
-        post.avatar = req.body.avatar;
-        post.date = req.body.date;
-        post.author = req.body.author;
-
-        post.save((err) => {
-            sendErr(err);
-            res.json({message: 'Post updated', data: post});
-        });
+        res.json({message: 'Post updated', data: post});
     });
 };
 
