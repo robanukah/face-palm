@@ -2,8 +2,7 @@ import express from 'express';
 
 const router = new express.Router();
 
-router
-    .route('/users')
-    .get((req, res) => res.json({message: 'USER ROUTE'}));
+router.use(require('./post-router'));
+router.use(require('./user-router'));
 
 module.exports = router;
